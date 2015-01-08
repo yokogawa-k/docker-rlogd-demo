@@ -1,0 +1,17 @@
+rlogd:
+    image: yokogawa/rlogd-demo
+    volumes:
+        - logs/:/var/run/rlogd/logs/
+    command: rlogd -dF
+rloggerd:
+    image: yokogawa/rlogd-demo
+    links:
+        - rlogd
+    volumes:
+        - sockets/:/sockets/
+    command: rloggerd -f 1 -d -l unix:///sockets/rloggerd.sock -t rlogd
+apache:
+    image: yokogawa/rlogd-demo
+    volumes:
+        - sockets/:/sockets/
+    command: apache2 -DFOREGROUND
