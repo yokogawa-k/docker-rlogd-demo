@@ -2,6 +2,7 @@ rlogd:
     image: yokogawa/rlogd-demo
     volumes:
         - logs/:/var/run/rlogd/logs/
+        - sockets/:/sockets/
     command: rlogd -dF
 rloggerd:
     image: yokogawa/rlogd-demo
@@ -9,7 +10,7 @@ rloggerd:
         - rlogd
     volumes:
         - sockets/:/sockets/
-    command: rloggerd -f 1 -d -l unix:///sockets/rloggerd.sock -t rlogd
+    command: rloggerd -f 1 -d -l unix:///sockets/rloggerd.sock -t unix:///sockets/rlogd.sock
 apache:
     image: yokogawa/rlogd-demo
     volumes:

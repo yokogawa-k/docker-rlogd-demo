@@ -1,10 +1,11 @@
 FROM buildpack-deps:jessie
-MAINTAINER Kazuya Yokogawa "yokogawa-k@klab.ocm"
+MAINTAINER Kazuya Yokogawa "yokogawa-k@klab.com"
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update \
     && apt-get -y --no-install-recommends install \
     libev-dev \
+    libpcre3-dev \
     apache2-bin \
     apache2.2-common \
     && apt-get autoremove \
